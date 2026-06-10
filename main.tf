@@ -88,7 +88,7 @@ resource "aws_security_group" "sg" {
 
 # enable logging
 resource "aws_cloudwatch_log_group" "ecs_logs" {
-  name              = "/ecs/minecraft"
+  name              = "/ecs/minecraft-container-logs"
   retention_in_days = 30
 }
 

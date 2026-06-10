@@ -4,7 +4,7 @@
 
 Minecraft is a widely played open-ended open-world sandbox game. While playing it locally by yourself is fun, it is possible to play it with friends in multiplayer mode. To do this, you will need a hosted Minecraft server. While several such public servers are available, it is possible to host your own server so that you can privately play with your friends.
 
-This repository provides an IaC (Infrastructure as Code) script that enables you to host your very own Minecraft server on [Amazon AWS](https://aws.amazon.com). This IaC script is written using [Terraform](https://developer.hashicorp.com/terraform) a popular IaC tool. The below diagram illustrates the basic "deployment map."
+This repository provides an IaC (Infrastructure as Code) script that enables you to host your very own Minecraft server on [Amazon AWS](https://aws.amazon.com) using a serverless [Fargate](https://aws.amazon.com/fargate) ECS instance and EBS. This IaC script is written using [Terraform](https://developer.hashicorp.com/terraform) a popular IaC tool. The below diagram illustrates the basic "deployment map."
 
 ![Deployment Diagram](./deployment.png)
 
@@ -17,7 +17,7 @@ The Terraform configuration file (script) will do the following:
 ### Key AWS technologies
 
 Key AWS technologies used:
-- ECS (Elastic Container Service)
+- ECS (Elastic Container Service) and Fargate
 - EBS (Elastic Block Storage)
 - CloudWatch (Logging)
 
@@ -55,7 +55,7 @@ data "aws_iam_role" "infra_role" {
 }
 ```
 
-**TO**
+**TO** (NOTE: This is an example. You may need specific changes for your account)
 
 ```
 resource "aws_iam_role" "infra_role" {
@@ -114,6 +114,18 @@ If all goes well, the script will output the public IP address of your minecraft
 ## Deployment sequence diagram
 
 ![Deployment Flowchart](./flowchart.png).
+
+Default deployment size:
+- CPU: 2048 (2 vCPUs)
+- Memory: 4096 (4GB)
+- EBS Volume Size: 8GB
+
+## Resources
+
+The following resources were found to be helpful when preparing the deployment script:
+- https://docs.aws.amazon.com/boto3/latest/reference/services/ecs.html
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+- https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_AWSCLI_Fargate.html
 
 ## License
 
