@@ -9,8 +9,8 @@ This repository provides an IaC (Infrastructure as Code) script that enables you
 ![Deployment Diagram](./deployment.png)
 
 The Terraform configuration file (script) will do the following:
-1. It will first create a security group (`MinecraftSG`) that only allows incoming Minecraft connections
-2. It will then define a task family for an ECS Service (`MinecraftTaskFamily`)
+1. It will first create a security group (`MinecraftSG`) that only allows incoming Minecraft connections and a CloudWatch Log Group (`/ecs/minecraft-container-logs`)
+2. It will then define a task family for an ECS Service (`MinecraftTaskFamily`).
 3. It will then create an ECS Cluster (`MinecraftCluster`)
 4. It will then execute the task to create an ECS Service (`MinecraftService`) which starts a container (`MinecraftContainer`) while also attaching an EBS volume. This enables you to restart the service without losing data.
 
@@ -19,6 +19,7 @@ The Terraform configuration file (script) will do the following:
 Key AWS technologies used:
 - ECS (Elastic Container Service)
 - EBS (Elastic Block Storage)
+- CloudWatch (Logging)
 
 ## A. Requirements
 
