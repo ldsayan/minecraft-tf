@@ -45,7 +45,7 @@ provider "aws" {}
 # region
 data "aws_region" "current" {}
 
-# role (change as is appropriate)
+# role (NOTE: change as is appropriate)
 data "aws_iam_role" "infra_role" {
   name = "LabRole"
 }
@@ -88,7 +88,7 @@ resource "aws_security_group" "sg" {
 
 # enable logging
 resource "aws_cloudwatch_log_group" "ecs_logs" {
-  name              = "/ecs/my-app"
+  name              = "/ecs/minecraft"
   retention_in_days = 30
 }
 
@@ -101,7 +101,7 @@ resource "aws_ecs_cluster" "cluster" {
 
 # define task
 resource "aws_ecs_task_definition" "service_def" {
-  family                   = "MinecraftFamily"
+  family                   = "MinecraftTaskFamily"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "2048"
